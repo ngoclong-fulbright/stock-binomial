@@ -2,7 +2,7 @@
 This is a Python program to forecast the probability of stock markets increasing
 the next time using binomial distribution.
 
-Method:
+# Method:
 Step 1: Choose 100is thenumber oftrials
 Step 2: Get the stock price history data of the US stock market. Limited to latest 2 days.
         Variables: open price, close price, the interval: 30mins.
