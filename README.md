@@ -10,3 +10,6 @@ the next time using binomial distribution.
 - Step 3: Draw the binomial distribution graph. 
          Shows the probability ofthe increases in the next 100 times.
 - Step 4: Provide suggestions based onthe result of the graph.
+
+Pygal library might not work on local compiler. Here is an online link that works: 
+https://trinket.io/python3/4bc3ac4280
