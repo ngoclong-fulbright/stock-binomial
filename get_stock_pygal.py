@@ -6,62 +6,6 @@ import requests, json
 from math import factorial, pow
 from time import sleep
 import pygal
-
-def main():
-    symbol = str(input('Enter stock code from a US company:'))
-    
-    company_name = print_info(symbol)
-    
-    #outputsize = 'full' to retrieve full data, 'compact' to retrieve maximum 100
-    params = {
-      'apikey': '62DF5PRP7SCRS7H6',
-      'function': 'TIME_SERIES_INTRADAY',
-      'interval':'30min',
-      'symbol': symbol,
-      'adjusted': 'false', 
-      'outputsize': 'compact'
-    }
-
-    api_result = requests.get('https://www.alphavantage.co/query?', params)
-
-    api_response = api_result.json()
-    
-    while True:
-        print('\n------------\n')
-        print('What action would you like to perform?')
-        print('\t1 - Choose another stock company')
-        print('\t2 - View', company_name,'history data')
-        print('\t3 - View', company_name,'binomial prediction graph')
-        print("\t4 - Get", company_name,"desired stock price's probability")
-        
-        try:
-            command = int(input('command = ') )
-        except:
-            print('\n------------\n')
-            print('\nInvalid input! Please enter a number!')
-            sleep(2)
-            continue
-        
-        print('\n------------\n')
-        #choose another stock
-        if command == 1:
-            main()
-        #view history info
-        elif command == 2:
-            draw_historydata(api_response, company_name)
-            sleep(2)
-        #binomial graph
-        elif command == 3:
-            draw_binomial(api_response)
-            sleep(2)
-        #Gambler's ruin
-        elif command == 4:
-            gambler_stock(symbol)
-            sleep(2)
-        #wrong input
-        else:
-            print('\nInvalid command! Please enter again!')
-            sleep(2)
             
 def test_request(api_result, api_response):
     if api_result.status_code != 200:
@@ -374,3 +318,59 @@ def gambler_prob(current, desired, change, prob_up):
             result = 0
             
     return result
+
+if __name__ == "__main__":
+    symbol = str(input('Enter stock code from a US company:'))
+    
+    company_name = print_info(symbol)
+    
+    #outputsize = 'full' to retrieve full data, 'compact' to retrieve maximum 100
+    params = {
+      'apikey': '62DF5PRP7SCRS7H6',
+      'function': 'TIME_SERIES_INTRADAY',
+      'interval':'30min',
+      'symbol': symbol,
+      'adjusted': 'false', 
+      'outputsize': 'compact'
+    }
+
+    api_result = requests.get('https://www.alphavantage.co/query?', params)
+
+    api_response = api_result.json()
+    
+    while True:
+        print('\n------------\n')
+        print('What action would you like to perform?')
+        print('\t1 - Choose another stock company')
+        print('\t2 - View', company_name,'history data')
+        print('\t3 - View', company_name,'binomial prediction graph')
+        print("\t4 - Get", company_name,"desired stock price's probability")
+        
+        try:
+            command = int(input('command = ') )
+        except:
+            print('\n------------\n')
+            print('\nInvalid input! Please enter a number!')
+            sleep(2)
+            continue
+        
+        print('\n------------\n')
+        #choose another stock
+        if command == 1:
+            main()
+        #view history info
+        elif command == 2:
+            draw_historydata(api_response, company_name)
+            sleep(2)
+        #binomial graph
+        elif command == 3:
+            draw_binomial(api_response)
+            sleep(2)
+        #Gambler's ruin
+        elif command == 4:
+            gambler_stock(symbol)
+            sleep(2)
+        #wrong input
+        else:
+            print('\nInvalid command! Please enter again!')
+            sleep(2)
